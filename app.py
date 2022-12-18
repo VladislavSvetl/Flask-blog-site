@@ -34,7 +34,8 @@ def works():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html')
+    articles = Article.query.order_by(-Article.id).all()
+    return render_template('blog.html', articles=articles)
 
 
 @app.route('/success')
