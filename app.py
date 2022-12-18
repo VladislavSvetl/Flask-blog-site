@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -37,9 +37,28 @@ def blog():
     return render_template('blog.html')
 
 
-@app.route('/create')
+@app.route('/success')
+def success():
+    return render_template('success.html')
+
+
+@app.route('/create', methods=['POST', 'GET'])
 def create():
-    return render_template('create.html')
+    if request.method == 'POST':
+        title = request.form['title']
+        intro = request.form['intro']
+        text = request.form['text']
+
+        article = Article(title=title, intro=intro, text=text)
+
+        try:
+            db.session.add(article)
+            db.session.commit()
+            return redirect('/success')
+        except:
+            return 'При добавлении статьи произошла ошибка...'
+    else:
+        return render_template('create.html')
 
 
 if __name__ == '__main__':
