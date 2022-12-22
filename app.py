@@ -61,6 +61,11 @@ def success():
     return render_template('success.html')
 
 
+@app.route('/success_update')
+def success_update():
+    return render_template('success_update.html')
+
+
 @app.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
@@ -78,6 +83,25 @@ def create():
             return 'При добавлении статьи произошла ошибка...'
     else:
         return render_template('create.html')
+
+
+@app.route('/blog/<int:id>/update', methods=['POST', 'GET'])
+def update(id):
+    article = Article.query.get(id)
+    if request.method == 'POST':
+        article.title = request.form['title']
+        article.intro = request.form['intro']
+        article.text = request.form['text']
+
+        try:
+            db.session.commit()
+            return redirect('/success_update')
+
+        except:
+            return 'При добавлении статьи произошла ошибка...'
+    else:
+        article = Article.query.get(id)
+        return render_template('update.html', article=article)
 
 
 if __name__ == '__main__':

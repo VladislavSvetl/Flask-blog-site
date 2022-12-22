@@ -19,6 +19,7 @@
     <hr>
     <br>
     <div class="container">
+        {% if articles %}
         <div class="row mb-2">
         {% for item in articles %}
             <div class="col-md-6">
@@ -33,6 +34,10 @@
             </div>
         {% endfor %}
         </div>
+        {% else %}
+        <h2 class="text-center">Записи отсутствуют</h2>
+        <br>
+        {% endif %}
     </div>
 </main>
 

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Успешно!
+{% endblock %}
+
+{% block main %}
+<br><br>
+<div class="container text-center">
+    <h1>Изменения сохранены</h1><br>
+    <a class="btn btn-success btn-lg" href="{{ url_for('create') }}">Добавить новую запись</a>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('blog') }}">Вернуться к блогу >></a><br><br>
+</div>
+
+{% endblock %}
