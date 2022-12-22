@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block main %}
+<br>
+<main>
+  <div class="container p-4 p-md-5 mb-4 rounded text-bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">{{ article.title }}</h1>
+      <p class="lead my-3">{{ article.intro }}</p>
+    </div>
+  </div>
+    <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-1">
+        <h5 class="display-5 fw-bold"><b>{{ article.date.strftime("%H:%M, %d %B %Y") }}</b></h5>
+        <p class="col-md-8 fs-4">{{ article.text }}</p>
+        <a href="/blog/{{ article.id }}/delete" class="btn btn-danger">Удалить</a>
+        <a href="/blog/{{ article.id }}/update" class="btn btn-warning">Редактировать</a>
+      </div>
+    </div>
+</main>
+
+{% endblock %}

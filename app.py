@@ -38,6 +38,24 @@ def blog():
     return render_template('blog.html', articles=articles)
 
 
+@app.route('/blog/<int:id>')
+def post(id):
+    article = Article.query.get(id)
+    return render_template('post.html', article=article)
+
+
+@app.route('/blog/<int:id>/delete')
+def delete(id):
+    article = Article.query.get_or_404(id)
+
+    try:
+        db.session.delete(article)
+        db.session.commit()
+        return redirect('/blog')
+    except:
+        return 'При удалении статьи произошла ошибка...'
+
+
 @app.route('/success')
 def success():
     return render_template('success.html')

@@ -7,22 +7,33 @@
 {% block main %}
 
 <main>
-      <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-          <h1 class="display-4 fw-normal">Блог</h1>
-          <p class="fs-5 text-muted">Статьи для реализации формы отображения информации на сайте в виде блога с возможностью добавления новых записей</p>
-          <a class="btn btn-primary" href="{{ url_for('create') }}">Новая запись</a>
-      </div>
+    <div class="container-fluid">
+        <div class="p-4 p-md-5 mb-4 rounded text-bg-dark text-center">
+            <div class="col-md-12 px-0">
+              <h1 class="display-4 fst-italic">БЛОГ</h1>
+              <p class="lead my-3">Статьи для реализации формы отображения информации на сайте в виде блога с возможностью добавления новых записей</p>
+              <a href="/create" class="center btn btn-warning btn-lg">Новая запись</a>
+            </div>
+        </div>
+    </div>
     <hr>
     <br>
-    {% for item in articles %}
-    <div class="container h-100 p-5 bg-light border rounded-3">
-        <h5>{{ item.date.strftime("%H:%M, %d %B %Y") }}</h5>
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.intro }}</p>
-        <button class="btn btn-outline-secondary" type="button">Читать >></button>
+    <div class="container">
+        <div class="row mb-2">
+        {% for item in articles %}
+            <div class="col-md-6">
+              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <h3 class="mb-0">{{ item.title }}</h3>
+                  <div class="mb-1 text-muted">{{ item.date.strftime("%H:%M, %d %B %Y") }}</div>
+                  <p class="card-text mb-auto">{{ item.intro }}</p>
+                  <a href="/blog/{{ item.id }}" class="stretched-link">Читать полностью >></a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
-    <br>
-    {% endfor %}
 </main>
 
 {% endblock %}
